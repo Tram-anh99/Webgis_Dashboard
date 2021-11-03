@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Styles -->
+<style>
+    #chartdiv {
+      width: 100%;
+      height: 500px;
+    }
+    
+    </style>
+    
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    
+    <!-- Chart code -->
+    <script>
+    am4core.ready(function() {
+    
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+    
+    /**
+     * Define data for each year
+     */
+    
+    // Create chart instance
+    var chart = am4core.create("chartdiv", am4charts.PieChart);
+    
+    // Add data
+    chart.data = data_ajax ;
+    
+    // Add label
+    chart.innerRadius = 100;
+    var label = chart.seriesContainer.createChild(am4core.Label);
+    label.text = "1995";
+    label.horizontalCenter = "middle";
+    label.verticalCenter = "middle";
+    label.fontSize = 50;
+    
+    // Add and configure Series
+    var pieSeries = chart.series.push(new am4charts.PieSeries());
+    pieSeries.dataFields.value = "size";
+    pieSeries.dataFields.category = "sector";
+    
+    // Animate chart data
+    var currentYear = 1995;
+    function getCurrentData() {
+      label.text = currentYear;
+      var data = chartData[currentYear];
+      
+      currentYear++;
+      if (currentYear > 2014)
+        currentYear = 1995;
+      return data;
+    }
+    
+    function loop() {
+      //chart.allLabels[0].text = currentYear;
+      var data = getCurrentData();
+      for(var i = 0; i < data.length; i++) {
+        chart.data[i].size = data[i].size;
+      }
+      chart.invalidateRawData();
+      chart.setTimeout( loop, 4000 );
+    }
+    
+    loop();
+    
+    }); // end am4core.ready()
+    </script>
+    
+    <!-- HTML -->
+    <div id="chartdiv"></div>
+</body>
+</html>
