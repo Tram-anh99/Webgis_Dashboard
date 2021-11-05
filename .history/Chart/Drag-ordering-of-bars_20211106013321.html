@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Resources -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Styles -->
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+
+    <!-- Resources -->
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <!-- Chart code -->
+    <script>
+        $(document).ready(function() {
+            var data_ajax = '';
+            // Ajax lấy dữ liệu
+            $.ajax({
+                type: 'GET',
+                url: '../json/Drag-ordering-of-bars.js',
+                dataType: 'script',
+                success: function(data) {
+                    data_ajax = eval(data);
+                }
+            });
+            $(document).ajaxComplete(function() {
+                am4core.ready(function() {
+
+                    // Themes begin
+                    am4core.useTheme(am4themes_animated);
+                    // Themes end
+
+                    // Create chart instance
+                    var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+                    // Add data
+                    chart.data = data_ajax;
+
+                    // Create axes
+                    var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+                    categoryAxis.dataFields.category = "year";
+                    categoryAxis.renderer.grid.template.location = 0;
+                    categoryAxis.renderer.minGridDistance = 10;
+                    categoryAxis.interpolationDuration = 2000;
+
+                    var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+
+                    // Create series
+                    function createSeries(field, name) {
+                        var series = chart.series.push(new am4charts.ColumnSeries());
+                        series.dataFields.valueX = "tongdientichrung";
+                        series.dataFields.categoryY = "year";
+                        series.columns.template.tooltipText = "[bold]Tổng diện tích rừng{valueX}[/]";
+                        series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+
+                        var hs = series.columns.template.states.create("hover");
+                        hs.properties.fillOpacity = 0.7;
+
+                        var columnTemplate = series.columns.template;
+                        columnTemplate.maxX = 0;
+                        columnTemplate.draggable = true;
+
+                        columnTemplate.events.on("dragstart", function(ev) {
+                            var dataItem = ev.target.dataItem;
+
+                            var axislabelItem = categoryAxis.dataItemsByCategory.getKey(
+                                dataItem.categoryY
+                            )._label;
+                            axislabelItem.isMeasured = false;
+                            axislabelItem.minX = axislabelItem.pixelX;
+                            axislabelItem.maxX = axislabelItem.pixelX;
+
+                            axislabelItem.dragStart(ev.target.interactions.downPointers.getIndex(0));
+                            axislabelItem.dragStart(ev.pointer);
+                        });
+                        columnTemplate.events.on("dragstop", function(ev) {
+                            var dataItem = ev.target.dataItem;
+                            var axislabelItem = categoryAxis.dataItemsByCategory.getKey(
+                                dataItem.categoryY
+                            )._label;
+                            axislabelItem.dragStop();
+                            handleDragStop(ev);
+                        });
+                    }
+                    createSeries("tongdientichrung", "Tổng diện tích rừng");
+
+                    function handleDragStop(ev) {
+                        data = [];
+                        chart.series.each(function(series) {
+                            if (series instanceof am4charts.ColumnSeries) {
+                                series.dataItems.values.sort(compare);
+
+                                var indexes = {};
+                                series.dataItems.each(function(seriesItem, index) {
+                                    indexes[seriesItem.categoryY] = index;
+                                });
+
+                                categoryAxis.dataItems.values.sort(function(a, b) {
+                                    var ai = indexes[a.category];
+                                    var bi = indexes[b.category];
+                                    if (ai == bi) {
+                                        return 0;
+                                    } else if (ai < bi) {
+                                        return -1;
+                                    } else {
+                                        return 1;
+                                    }
+                                });
+
+                                var i = 0;
+                                categoryAxis.dataItems.each(function(dataItem) {
+                                    dataItem._index = i;
+                                    i++;
+                                });
+
+                                categoryAxis.validateDataItems();
+                                series.validateDataItems();
+                            }
+                        });
+                    }
+
+                    function compare(a, b) {
+                        if (a.column.pixelY < b.column.pixelY) {
+                            return 1;
+                        }
+                        if (a.column.pixelY > b.column.pixelY) {
+                            return -1;
+                        }
+                        return 0;
+                    }
+
+                }); // end am4core.ready()
+            });
+        });
+    </script>
+
+    <!-- HTML -->
+    <div id="chartdiv"></div>
+</body>
+
+</html>

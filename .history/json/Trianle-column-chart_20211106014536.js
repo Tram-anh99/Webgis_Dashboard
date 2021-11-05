@@ -1,0 +1,37 @@
+[{
+    "year": "2009",
+    "laodongtren15": 3025
+}, {
+    "year": "2010",
+    "laodongtren15": 1882
+}, {
+    "year": "2011",
+    "laodongtren15": 1809
+}, {
+    "year": "2012",
+    "laodongtren15": 1322
+}, {
+    "year": "2013",
+    "laodongtren15": 1122
+}, {
+    "year": "2014",
+    "laodongtren15": -1114
+}, {
+    "year": "2015",
+    "laodongtren15": -984
+}, {
+    "year": "2016",
+    "laodongtren15": 711
+}, {
+    "year": "2017",
+    "laodongtren15": 665
+}, {
+    "year": "2018",
+    "laodongtren15": -580
+}, {
+    "year": "2019",
+    "laodongtren15": 443
+}, {
+    "year": "Twelve",
+    "laodongtren15": 441
+}]

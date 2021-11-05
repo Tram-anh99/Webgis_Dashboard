@@ -1,0 +1,30 @@
+[{
+    "year": "2009",
+    "": 23.5,
+    "expenses": 21.1
+}, {
+    "year": "2010",
+    "": 26.2,
+    "expenses": 30.5
+}, {
+    "year": "2011",
+    "": 30.1,
+    "expenses": 34.9
+}, {
+    "year": "2012",
+    "": 29.5,
+    "expenses": 31.1
+}, {
+    "year": "2013",
+    "": 30.6,
+    "expenses": 28.2,
+    "lineDash": "5,5",
+}, {
+    "year": "2014",
+    "": 34.1,
+    "expenses": 32.9,
+    "strokeWidth": 1,
+    "columnDash": "5,5",
+    "fillOpacity": 0.2,
+    "additional": "(projection)"
+}]

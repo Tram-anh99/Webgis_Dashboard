@@ -1,0 +1,37 @@
+[{
+    "year": "2009",
+    "laodongtren15": 3025
+}, {
+    "year": "2010",
+    "laodongtren15": 1882
+}, {
+    "year": "2011",
+    "laodongtren15": 1809
+}, {
+    "year": "2012",
+    "laodongtren15": 1322
+}, {
+    "year": "Five",
+    "laodongtren15": 1122
+}, {
+    "year": "Six",
+    "laodongtren15": -1114
+}, {
+    "year": "Seven",
+    "laodongtren15": -984
+}, {
+    "year": "Eight",
+    "laodongtren15": 711
+}, {
+    "year": "Nine",
+    "laodongtren15": 665
+}, {
+    "year": "Ten",
+    "laodongtren15": -580
+}, {
+    "year": "Eleven",
+    "laodongtren15": 443
+}, {
+    "year": "Twelve",
+    "laodongtren15": 441
+}]

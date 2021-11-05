@@ -1,0 +1,37 @@
+[{
+    "country": "2009",
+    "value": 3025
+}, {
+    "country": "2010",
+    "value": 1882
+}, {
+    "country": "2011",
+    "value": 1809
+}, {
+    "country": "2012",
+    "value": 1322
+}, {
+    "country": "2013",
+    "value": 1122
+}, {
+    "country": "2014",
+    "value": -1114
+}, {
+    "country": "2015",
+    "value": -984
+}, {
+    "country": "2016",
+    "value": 711
+}, {
+    "country": "2017",
+    "value": 665
+}, {
+    "country": "2018",
+    "value": -580
+}, {
+    "country": "2019",
+    "value": 443
+}, {
+    "country": "2020",
+    "value": 441
+}]

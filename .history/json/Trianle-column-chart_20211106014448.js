@@ -1,0 +1,37 @@
+[{
+    "year": "One",
+    "value": 3025
+}, {
+    "year": "Two",
+    "value": 1882
+}, {
+    "year": "Three",
+    "value": 1809
+}, {
+    "year": "Four",
+    "value": 1322
+}, {
+    "year": "Five",
+    "value": 1122
+}, {
+    "year": "Six",
+    "value": -1114
+}, {
+    "year": "Seven",
+    "value": -984
+}, {
+    "year": "Eight",
+    "value": 711
+}, {
+    "year": "Nine",
+    "value": 665
+}, {
+    "year": "Ten",
+    "value": -580
+}, {
+    "year": "Eleven",
+    "value": 443
+}, {
+    "year": "Twelve",
+    "value": 441
+}]
